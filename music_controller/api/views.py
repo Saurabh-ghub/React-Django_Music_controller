@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import datetime
+from rest_framework import generics
+from .models import Room
+from .serializer import RoomSerializer
+
 # Create your views here.
-def home(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
+class RoomView(generics.CreateAPIView):
+    queryset=Room.objects.all()
+    serializer_class=RoomSerializer
+
